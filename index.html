@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>급식 정보 알리미</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>급식 정보 알리미</h1>
+        <p class="subtitle">날짜를 선택해서 학교 급식 정보를 조회해보세요.</p>
+
+        <section class="card controls">
+            <label class="field">
+                <span>시도교육청</span>
+                <select id="officeCode">
+                    <option value="B10">서울특별시교육청</option>
+                    <option value="C10">부산광역시교육청</option>
+                    <option value="D10">대구광역시교육청</option>
+                    <option value="E10">인천광역시교육청</option>
+                    <option value="F10">광주광역시교육청</option>
+                    <option value="G10">대전광역시교육청</option>
+                    <option value="H10">울산광역시교육청</option>
+                    <option value="I10">세종특별자치시교육청</option>
+                    <option value="J10">경기도교육청</option>
+                    <option value="K10">강원특별자치도교육청</option>
+                    <option value="M10">충청북도교육청</option>
+                    <option value="N10">충청남도교육청</option>
+                    <option value="P10">전북특별자치도교육청</option>
+                    <option value="Q10">전라남도교육청</option>
+                    <option value="R10">경상북도교육청</option>
+                    <option value="S10">경상남도교육청</option>
+                    <option value="T10">제주특별자치도교육청</option>
+                </select>
+            </label>
+
+            <label class="field">
+                <span>학교명</span>
+                <input id="schoolName" type="text" placeholder="예: 함지고등학교">
+            </label>
+
+            <label class="field">
+                <span>조회 날짜</span>
+                <input id="mealDate" type="date">
+            </label>
+
+            <button id="searchBtn" type="button">급식 조회</button>
+        </section>
+
+        <section class="card result">
+            <p id="statusText">오늘 급식 정보를 불러오는 중...</p>
+            <div id="mealInfo"></div>
+        </section>
+    </main>
+
+    <script src="./app.js"></script>
+</body>
+</html>
