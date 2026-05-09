@@ -15,6 +15,230 @@ body {
     overflow: visible;
 }
 
+/* ── 탭 네비게이션 ─────────────────────────── */
+.app-tabs {
+    border-bottom: none;
+    gap: 4px;
+}
+
+.app-tabs .nav-link {
+    border-radius: 0.75rem 0.75rem 0 0;
+    border: 1px solid transparent;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.55rem 1.1rem;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.app-tabs .nav-link:hover {
+    color: #2563eb;
+    background-color: rgba(37, 99, 235, 0.06);
+    border-color: rgba(148, 163, 184, 0.3) rgba(148, 163, 184, 0.3) transparent;
+}
+
+.app-tabs .nav-link.active {
+    color: #2563eb;
+    background-color: #ffffff;
+    border-color: rgba(148, 163, 184, 0.3) rgba(148, 163, 184, 0.3) #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+.app-tab-content > .tab-pane > .card {
+    border-top-left-radius: 0 !important;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+/* ── 뷰 전환 토글 ─────────────────────────── */
+.schedule-view-toggle .btn {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+}
+
+/* ── 학사일정 목록 ────────────────────────── */
+.schedule-item {
+    border-left: 3px solid #2563eb;
+    background: rgba(255, 255, 255, 0.7);
+    word-break: keep-all;
+    transition: box-shadow 0.15s ease;
+}
+
+.schedule-item:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(37, 99, 235, 0.1) !important;
+}
+
+.schedule-item-date {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #2563eb;
+    white-space: nowrap;
+}
+
+.schedule-item-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.schedule-grade-badges .badge {
+    font-size: 0.7rem;
+    padding: 0.2em 0.5em;
+}
+
+/* ── 캘린더 그리드 ────────────────────────── */
+.schedule-calendar {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.schedule-cal-grid {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 320px;
+    table-layout: fixed;
+}
+
+.schedule-cal-grid th {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 2px;
+    color: #64748b;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.schedule-cal-grid th.sun { color: #ef4444; }
+.schedule-cal-grid th.sat { color: #3b82f6; }
+
+.cal-cell {
+    vertical-align: top;
+    padding: 4px 3px;
+    border: 1px solid #f1f5f9;
+    min-height: 64px;
+    height: 64px;
+}
+
+.cal-cell.other-month { opacity: 0.35; }
+
+.cal-date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.cal-cell.today .cal-date {
+    background: #2563eb;
+    color: #fff;
+}
+
+.cal-date.sun { color: #ef4444; }
+.cal-date.sat { color: #3b82f6; }
+
+.cal-events {
+    margin-top: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cal-event-chip {
+    font-size: 0.65rem;
+    line-height: 1.2;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    word-break: break-all;
+    white-space: normal;
+    cursor: default;
+}
+
+.cal-chip-holiday {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.cal-chip-offday {
+    background: #fef9c3;
+    color: #92400e;
+}
+
+/* 목록 아이템 좌측 테두리 색 */
+.schedule-item-holiday { border-left-color: #ef4444 !important; }
+.schedule-item-offday  { border-left-color: #f59e0b !important; }
+.schedule-item-default { border-left-color: #2563eb !important; }
+
+/* ── 다크모드: 탭 & 학사일정 ─────────────── */
+body.dark .app-tabs .nav-link {
+    color: #94a3b8;
+}
+
+body.dark .app-tabs .nav-link:hover {
+    color: #7dd3fc;
+    background-color: rgba(125, 211, 252, 0.08);
+}
+
+body.dark .app-tabs .nav-link.active {
+    color: #7dd3fc;
+    background-color: #1e293b;
+    border-color: #475569 #475569 #1e293b;
+}
+
+body.dark .app-tab-content > .tab-pane > .card {
+    border-color: #334155 !important;
+}
+
+body.dark .schedule-item {
+    border-left-color: #3b82f6;
+    background: rgba(15, 23, 42, 0.45);
+    color: #e2e8f0;
+}
+
+body.dark .schedule-item-date {
+    color: #7dd3fc;
+}
+
+body.dark .schedule-item-name {
+    color: #f1f5f9;
+}
+
+body.dark .schedule-cal-grid th {
+    color: #94a3b8;
+    border-bottom-color: #334155;
+}
+
+body.dark .cal-cell {
+    border-color: #1e293b;
+}
+
+body.dark .cal-date {
+    color: #e2e8f0;
+}
+
+body.dark .cal-date.sun { color: #fca5a5; }
+body.dark .cal-date.sat { color: #93c5fd; }
+
+body.dark .cal-cell.today .cal-date {
+    background: #2563eb;
+    color: #fff;
+}
+
+body.dark .cal-event-chip {
+    background: rgba(37, 99, 235, 0.25);
+    color: #93c5fd;
+}
+
+body.dark #scheduleStatusText {
+    color: #7dd3fc !important;
+}
+
 .controls-divider {
     margin-left: -0.25rem;
     margin-right: -0.25rem;

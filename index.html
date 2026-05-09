@@ -3,37 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>급식 정보 알리미</title>
+    <title>학교 정보 알리미</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            corePlugins: {
-                preflight: false
-            }
-        };
+        tailwind.config = { corePlugins: { preflight: false } };
     </script>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-slate-100 via-white to-sky-50">
     <div class="page-shell container py-4 py-md-5">
-        <header class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 mb-md-5">
+
+        <!-- 헤더 -->
+        <header class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
             <div>
-                <h1 class="display-6 fw-bold text-slate-800 mb-1">급식 정보 알리미</h1>
-                <p class="text-secondary mb-0 small">날짜를 선택해 학교 급식·영양·원산지 정보를 한눈에 확인하세요.</p>
+                <h1 class="display-6 fw-bold text-slate-800 mb-1">학교 정보 알리미</h1>
+                <p class="text-secondary mb-0 small">급식 정보와 학사일정을 한 곳에서 확인하세요.</p>
             </div>
             <button id="themeToggleBtn" type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3 shadow-sm">🌙 다크모드</button>
         </header>
 
         <div class="row g-4 justify-content-center">
             <div class="col-12 col-lg-10 col-xl-9">
-                <section class="card controls-card border-0 shadow-lg rounded-4 mb-4">
-                    <div class="card-body p-3 p-md-4 p-xl-5 bg-white">
-                        <h2 class="h5 fw-semibold text-slate-700 mb-3 mb-md-4">조회 조건</h2>
 
-                        <div class="row g-3 g-md-4">
-                            <div class="col-12 col-md-6">
+                <!-- ① 공통 조회 조건 카드 -->
+                <section class="card controls-card border-0 shadow-lg rounded-4 mb-3">
+                    <div class="card-body p-3 p-md-4 bg-white">
+                        <div class="row g-3 align-items-end controls-row">
+                            <div class="col-12 col-md-5 col-xl-5">
                                 <label class="form-label small fw-semibold text-secondary mb-1" for="officeCode">시도교육청</label>
                                 <select id="officeCode" class="form-select rounded-3 border-slate-200 shadow-sm">
                                     <option value="B10">서울특별시교육청</option>
@@ -55,7 +53,7 @@
                                     <option value="T10">제주특별자치도교육청</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-md-6">
+                            <div class="col-12 col-md-4 col-xl-4">
                                 <label class="form-label small fw-semibold text-secondary mb-1" for="schoolName">학교명</label>
                                 <select id="schoolName" class="form-select rounded-3 border-slate-200 shadow-sm">
                                     <option value="함지고등학교">함지고등학교</option>
@@ -64,27 +62,117 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                </section>
 
-                        <hr class="controls-divider border-secondary-subtle opacity-75 my-3 my-md-4">
+                <!-- ② 탭 네비게이션 -->
+                <ul class="nav nav-tabs app-tabs px-1 mb-0" id="mainTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="tab-meal-btn" data-bs-toggle="tab"
+                            data-bs-target="#tab-meal" type="button" role="tab"
+                            aria-controls="tab-meal" aria-selected="true">
+                            🍱 급식 정보
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab-schedule-btn" data-bs-toggle="tab"
+                            data-bs-target="#tab-schedule" type="button" role="tab"
+                            aria-controls="tab-schedule" aria-selected="false">
+                            📅 학사일정
+                        </button>
+                    </li>
+                </ul>
 
-                        <div class="row g-3 g-md-4 align-items-start">
-                            <div class="col-12 col-md-6 col-xl-6">
-                                <label id="labelMealDate" class="form-label small fw-semibold text-secondary mb-1" for="mealDate">조회 날짜</label>
-                                <input id="mealDate" type="text" readonly inputmode="none" autocomplete="off">
-                            </div>
-                            <div class="col-12 col-md-3 col-xl-2 ms-md-auto">
-                                <button id="searchBtn" type="button" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold shadow-sm">급식 조회</button>
+                <!-- ③ 탭 콘텐츠 -->
+                <div class="tab-content app-tab-content">
+
+                    <!-- 급식 탭 -->
+                    <div class="tab-pane fade show active" id="tab-meal" role="tabpanel" aria-labelledby="tab-meal-btn">
+                        <div class="card border-0 border-top-0 shadow-lg rounded-bottom-4">
+                            <div class="card-body p-3 p-md-4 bg-white">
+
+                                <div class="row g-3 g-md-4 align-items-start">
+                                    <div class="col-12 col-md-6 col-xl-6">
+                                        <label id="labelMealDate" class="form-label small fw-semibold text-secondary mb-1" for="mealDate">조회 날짜</label>
+                                        <input id="mealDate" type="text" readonly inputmode="none" autocomplete="off">
+                                    </div>
+                                    <div class="col-12 col-md-3 col-xl-2 ms-md-auto">
+                                        <button id="searchBtn" type="button" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold shadow-sm">급식 조회</button>
+                                    </div>
+                                </div>
+
+                                <hr class="border-secondary-subtle opacity-75 my-3">
+
+                                <p id="statusText" class="fw-semibold text-primary mb-3 small text-uppercase letter-spacing-tight">급식 정보를 불러오는 중...</p>
+                                <div id="mealInfo" class="d-flex flex-column gap-3"></div>
                             </div>
                         </div>
                     </div>
-                </section>
 
-                <section class="card border-0 shadow-lg rounded-4 overflow-hidden">
-                    <div class="card-body p-4 p-md-5 bg-white">
-                        <p id="statusText" class="fw-semibold text-primary mb-3 mb-md-4 small text-uppercase letter-spacing-tight">급식 정보를 불러오는 중...</p>
-                        <div id="mealInfo" class="d-flex flex-column gap-3"></div>
+                    <!-- 학사일정 탭 -->
+                    <div class="tab-pane fade" id="tab-schedule" role="tabpanel" aria-labelledby="tab-schedule-btn">
+                        <div class="card border-0 border-top-0 shadow-lg rounded-bottom-4">
+                            <div class="card-body p-3 p-md-4 bg-white">
+
+                                <!-- 학사일정 조회 조건 -->
+                                <div class="row g-3 align-items-end mb-3">
+                                    <div class="col-6 col-md-3">
+                                        <label class="form-label small fw-semibold text-secondary mb-1" for="scheduleYear">연도</label>
+                                        <select id="scheduleYear" class="form-select rounded-3 border-slate-200 shadow-sm"></select>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <label class="form-label small fw-semibold text-secondary mb-1" for="scheduleMonth">월</label>
+                                        <select id="scheduleMonth" class="form-select rounded-3 border-slate-200 shadow-sm">
+                                            <option value="01">1월</option>
+                                            <option value="02">2월</option>
+                                            <option value="03">3월</option>
+                                            <option value="04">4월</option>
+                                            <option value="05">5월</option>
+                                            <option value="06">6월</option>
+                                            <option value="07">7월</option>
+                                            <option value="08">8월</option>
+                                            <option value="09">9월</option>
+                                            <option value="10">10월</option>
+                                            <option value="11">11월</option>
+                                            <option value="12">12월</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <button id="scheduleSearchBtn" type="button" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold shadow-sm">학사일정 조회</button>
+                                    </div>
+                                </div>
+
+                                <!-- 뷰 전환 토글 -->
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <p id="scheduleStatusText" class="fw-semibold text-primary mb-0 small text-uppercase letter-spacing-tight">학사일정을 조회하세요.</p>
+                                    <div class="btn-group btn-group-sm schedule-view-toggle" role="group" aria-label="뷰 전환">
+                                        <button type="button" class="btn btn-outline-secondary active" id="viewListBtn" data-view="list">☰ 목록</button>
+                                        <button type="button" class="btn btn-outline-secondary" id="viewCalBtn" data-view="calendar">▦ 캘린더</button>
+                                    </div>
+                                </div>
+
+                                <!-- 목록 뷰 -->
+                                <div id="scheduleListView">
+                                    <div id="scheduleList" class="d-flex flex-column gap-2"></div>
+                                </div>
+
+                                <!-- 캘린더 뷰 -->
+                                <div id="scheduleCalView" class="d-none">
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <button id="calPrevBtn" type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3">‹ 이전</button>
+                                        <span id="calTitle" class="fw-semibold text-slate-700"></span>
+                                        <button id="calNextBtn" type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3">다음 ›</button>
+                                    </div>
+                                    <div id="scheduleCalendar" class="schedule-calendar"></div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                </section>
+
+                </div>
+                <!-- /tab-content -->
+
             </div>
         </div>
     </div>
@@ -93,5 +181,6 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
     <script src="./app.js"></script>
+    <script src="./schedule.js"></script>
 </body>
 </html>

@@ -3,11 +3,13 @@ var API_KEY = "sample";
 var DEFAULT_OFFICE_CODE = "D10";
 var DEFAULT_SCHOOL_NAME = "함지고등학교";
 var DEFAULT_SCHOOL_CODE = "7240273";
-var FIXED_SCHOOLS = {
+/* schedule.js에서도 window.FIXED_SCHOOLS로 접근 */
+window.FIXED_SCHOOLS = {
     "함지고등학교": { officeCode: "D10", schoolCode: "7240273" },
     "칠곡중학교": { officeCode: "D10", schoolCode: "7261015" },
     "수남중학교": { officeCode: "S10", schoolCode: "9091210" }
 };
+var FIXED_SCHOOLS = window.FIXED_SCHOOLS;
 
 var officeCodeEl = null;
 var schoolNameEl = null;
@@ -41,7 +43,12 @@ function initializeApp() {
 
     schoolNameEl.addEventListener("change", function () {
         syncOfficeBySelectedSchool();
-        fetchMealInfo();
+        var activeTab = document.querySelector(".app-tabs .nav-link.active");
+        if (activeTab && activeTab.id === "tab-schedule-btn") {
+            if (typeof fetchSchedule === "function") { fetchSchedule(); }
+        } else {
+            fetchMealInfo();
+        }
     });
 
     if (themeToggleBtnEl) {
