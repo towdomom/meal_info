@@ -3,118 +3,238 @@
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: #1f2937;
-    background: #f3f4f6;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.container {
-    max-width: 760px;
-    margin: 40px auto;
-    padding: 0 16px 24px;
+.page-shell {
+    max-width: 992px;
 }
 
-h1 {
-    margin: 0 0 8px;
-    font-size: 30px;
+.controls-card {
+    overflow: visible;
 }
 
-.subtitle {
-    margin: 0 0 20px;
-    color: #4b5563;
+.controls-divider {
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
 }
 
-.card {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+@media (min-width: 768px) {
+    .controls-divider {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
 }
 
-.controls {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
-}
-
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.field span {
-    font-size: 14px;
-    color: #374151;
-}
-
-input,
-select,
-button {
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 14px;
-}
-
-button {
-    border: none;
-    background: #2563eb;
-    color: white;
-    font-weight: 600;
+.meal-date-trigger {
     cursor: pointer;
+    caret-color: transparent;
+    min-height: calc(1.5em + 0.75rem + 2px);
 }
 
-button:hover {
-    opacity: 0.92;
+.letter-spacing-tight {
+    letter-spacing: 0.02em;
 }
 
-.result {
-    min-height: 140px;
+.meal-block.card {
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: linear-gradient(145deg, #f8fafc 0%, #ffffff 55%, #f1f5f9 100%);
 }
 
-#statusText {
-    margin: 0 0 12px;
-    color: #1d4ed8;
-    font-weight: 600;
+.meal-dish-item {
+    background: rgba(255, 255, 255, 0.7);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
 }
 
-.meal-block {
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 10px;
-    background: #f9fafb;
+.meal-menu-section .meal-dish-item {
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.meal-title {
-    margin: 0 0 8px;
-    font-size: 16px;
+.meal-menu-section .meal-dish-item:hover {
+    border-color: rgba(37, 99, 235, 0.35) !important;
+    box-shadow: 0 0.25rem 0.65rem rgba(37, 99, 235, 0.12) !important;
 }
 
-.meal-menu {
-    margin: 0;
-    white-space: pre-line;
-    line-height: 1.7;
+.origin-item {
+    word-break: keep-all;
+    overflow-wrap: anywhere;
 }
 
-.meal-meta {
-    margin-top: 10px;
-    border-top: 1px solid #e5e7eb;
-    padding-top: 10px;
+.origin-item-label {
+    font-size: 0.8125rem;
+    color: #495057;
 }
 
-.meal-meta p {
-    margin: 4px 0;
-    color: #374151;
-    line-height: 1.6;
-    white-space: pre-line;
+.origin-item-value {
+    font-size: 0.8125rem;
 }
 
-@media (max-width: 640px) {
-    .controls {
-        grid-template-columns: 1fr;
+@media (min-width: 992px) {
+    .origin-items.row {
+        --bs-gutter-x: 0.65rem;
+        --bs-gutter-y: 0.65rem;
+    }
+}
+
+body.dark {
+    background: linear-gradient(160deg, #0f172a 0%, #1e293b 45%, #0c4a6e 100%) !important;
+    color: #e2e8f0;
+}
+
+body.dark .text-slate-800 {
+    color: #f1f5f9 !important;
+}
+
+body.dark .text-secondary {
+    color: #94a3b8 !important;
+}
+
+body.dark .card-body.bg-white {
+    background-color: #1e293b !important;
+    color: #e2e8f0;
+}
+
+body.dark .form-label {
+    color: #cbd5e1 !important;
+}
+
+body.dark .form-control,
+body.dark .form-select {
+    background-color: #0f172a;
+    border-color: #334155 !important;
+    color: #e2e8f0;
+}
+
+body.dark #statusText {
+    color: #7dd3fc !important;
+}
+
+body.dark .meal-block.card {
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+    border-color: #334155;
+}
+
+body.dark .meal-menu {
+    color: #e2e8f0 !important;
+}
+
+body.dark .origin-item-label {
+    color: #cbd5e1 !important;
+}
+
+body.dark .origin-item-value {
+    color: #f1f5f9 !important;
+}
+
+body.dark .origin-item {
+    border-color: #475569 !important;
+    background-color: rgba(15, 23, 42, 0.35) !important;
+}
+
+body.dark .meal-dish-item {
+    background: rgba(15, 23, 42, 0.45);
+    border-color: #475569 !important;
+    color: #f1f5f9 !important;
+}
+
+body.dark .meal-menu-section .meal-dish-item:hover {
+    border-color: rgba(125, 211, 252, 0.5) !important;
+    box-shadow: 0 0.35rem 0.85rem rgba(0, 0, 0, 0.25) !important;
+}
+
+body.dark .meal-type-name {
+    color: #f8fafc;
+}
+
+body.dark .table {
+    color: #e2e8f0;
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.08);
+}
+
+body.dark thead.table-light th {
+    background-color: #334155 !important;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark .origin-wrap {
+    border-top-color: #475569 !important;
+}
+
+body.dark .origin-wrap .text-secondary {
+    color: #94a3b8 !important;
+}
+
+body.dark .controls-divider {
+    border-color: #475569 !important;
+    opacity: 1;
+}
+
+body.dark .flatpickr-calendar {
+    background: #1e293b;
+    border-color: #475569;
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.45) !important;
+    color: #e2e8f0;
+}
+
+body.dark .flatpickr-months .flatpickr-month,
+body.dark span.flatpickr-weekday,
+body.dark .flatpickr-current-month .flatpickr-monthDropdown-months,
+body.dark .flatpickr-current-month input.cur-year {
+    color: #f1f5f9;
+    fill: #f1f5f9;
+}
+
+body.dark .flatpickr-weekday {
+    color: #94a3b8;
+}
+
+body.dark .flatpickr-day {
+    color: #e2e8f0;
+}
+
+body.dark .flatpickr-day:hover,
+body.dark .flatpickr-day:focus {
+    background: #334155;
+    border-color: #334155;
+}
+
+body.dark .flatpickr-day.selected,
+body.dark .flatpickr-day.startRange,
+body.dark .flatpickr-day.endRange {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+body.dark .flatpickr-day.prevMonthDay,
+body.dark .flatpickr-day.nextMonthDay {
+    color: #64748b;
+}
+
+body.dark .flatpickr-monthDropdown-months option,
+body.dark .numInputWrapper input {
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+body.dark .btn-outline-secondary {
+    border-color: #64748b;
+    color: #e2e8f0;
+}
+
+body.dark .btn-outline-secondary:hover {
+    background-color: #334155;
+    border-color: #94a3b8;
+    color: #f8fafc;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        transition: none;
     }
 }
